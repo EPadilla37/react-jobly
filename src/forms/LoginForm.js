@@ -22,8 +22,6 @@ const LoginForm = ({ login }) => {
     formErrors
   );
 
-  /** Update form fields */
-
   const handleChange = evt => {
     const { name, value } = evt.target;
     setFormData(formData => ({

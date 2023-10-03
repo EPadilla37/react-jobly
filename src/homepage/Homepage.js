@@ -25,9 +25,6 @@ const Homepage = () => {
             </div>
           )}
         </div>
-        <div className="image-container">
-          <img src={`${process.env.PUBLIC_URL}/working_illistration.png`} alt="working illustration" className="homepage-image" />
-        </div>
       </div>
     </div>
   );

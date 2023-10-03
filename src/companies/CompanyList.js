@@ -16,7 +16,6 @@ const CompanyList = () => {
     search();
   }, []);
 
-  /** Triggered by search form submit; reloads companies. */
   async function search(name) {
     let companies = await JoblyApi.getCompanies(name);
     setCompanies(companies);
@@ -38,7 +37,6 @@ const CompanyList = () => {
               handle={c.handle}
               name={c.name}
               description={c.description}
-              logoUrl={c.logoUrl}
             />
           ))}
         </div>

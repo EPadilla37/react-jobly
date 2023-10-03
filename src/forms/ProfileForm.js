@@ -44,13 +44,6 @@ const ProfileForm = ({ deleteUser }) => {
     setFormErrors([]);
   };
 
-  /** on form submit:
-   * - attempt save to backend & report any errors
-   * - if successful
-   *   - clear previous error messages and password
-   *   - show save-confirmed message
-   *   - set current user info throughout the site
-   */
   const handleSubmit = async evt => {
     evt.preventDefault();
 

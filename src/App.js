@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { BrowserRouter } from 'react-router-dom';
 import useLocalStorage from './common/useLocalStorage';
-import jwt from 'jsonwebtoken';
+// import jwt from 'jsonwebtoken';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 import JoblyApi from './common/api';
@@ -31,26 +31,32 @@ const App = () => {
         token
       );
     
-    useEffect(() => {
+      useEffect(() => {
         async function getCurrentUser() {
-            if(token) {
-                try {
-                    let {username} = jwt.decode(token); 
-                    JoblyApi.token = token; 
-
-                    let currentUser = await JoblyApi.getCurrentUser(username); 
-                    setApplicationIds(new Set(currentUser.applications));
-                    setCurrentUser(currentUser); 
-                }catch(err) {
-                    console.error('App getCurrentUser problem loading', err);
-                    setCurrentUser(null);
-                }
+          if (token) {
+            try {
+              // Decoding the JWT token without jsonwebtoken library
+              const tokenParts = token.split('.');
+              if (tokenParts.length === 3) {
+                const payload = JSON.parse(atob(tokenParts[1]));
+                const { username } = payload;
+    
+                JoblyApi.token = token;
+    
+                let currentUser = await JoblyApi.getCurrentUser(username);
+                setApplicationIds(new Set(currentUser.applications));
+                setCurrentUser(currentUser);
+              }
+            } catch (err) {
+              console.error('App getCurrentUser problem loading', err);
+              setCurrentUser(null);
             }
-            setInfoLoaded(true); 
+          }
+          setInfoLoaded(true);
         }
         setInfoLoaded(false);
         getCurrentUser();
-    }, [token]); 
+      }, [token]);
 
     async function signup(signupData){
         try{

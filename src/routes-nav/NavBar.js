@@ -1,11 +1,11 @@
-import React from "react";
+import React, {useContext} from "react";
 import { NavLink, Link } from "react-router-dom";
 import UserContext from "../UserContext";
 
 //This file handles navigation bar for the app 
 
 const NavBar = ({logout}) => {
-    const { currentUser } = UserContext(UserContext);
+    const { currentUser } = useContext(UserContext);
 
     function loggedInNav() {
         return (
